@@ -24,5 +24,8 @@ class TwitterController extends Controller
                 ]
             );
         }
+
+        return response('Ok.', 200);
+
     }
 }
