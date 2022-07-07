@@ -21,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/rates', RateController::class);
 
+Route::match(['get', 'post'], '/webhook/twitter', [\App\Http\Controllers\TwitterController::class, 'index']);
+
+
 
