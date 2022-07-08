@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/rates', RateController::class);
-
-Route::match(['get', 'post'], '/webhook/twitter', [\App\Http\Controllers\TwitterController::class, 'index']);
+Route::get('/rates', [\App\Http\Controllers\RateController::class, 'index']);
 
 Route::get('/tweet', [\App\Http\Controllers\TwitterController::class, 'postRates']);
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Rate;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
@@ -35,22 +34,6 @@ class TwitterController extends Controller
         ]);
     }
 
-    public function index(Request $request)
-    {
-        // Checks if requests contains crc_token from Twitter servers.
-        if ($request->has('crc_token')) {
-
-            $hash = hash_hmac("sha256", $request->crc_token, env('CONSUMER_SECRET'), true);
-            return response()->json(
-                [
-                    "response_token" => "sha256=" . base64_encode($hash)
-                ]
-            );
-        }
-
-        return response('Ok.', 200);
-    }
-
     public function tweet(string $message)
     {
         $response = $this->client->post('tweets', [
@@ -66,6 +49,11 @@ class TwitterController extends Controller
     {
         $countries = Country::all();
         $rates = Rate::all();
+
+        if (empty($countries) || empty($rates)) {
+            # code...
+            return;
+        }
 
         $flags = [
             'Kenya' => '🇰🇪',
@@ -86,7 +74,6 @@ class TwitterController extends Controller
                 $r = json_decode($rate->rates, true);
                 $tweet .= "{$currency_emojis[$rate->base]}" . " 1 " . $rate->base . "  >>  " . $country->symbol . number_format(round($r[$country->symbol], 2)) . "\r\n";
             }
-            // return $tweet;
             $this->tweet($tweet);
         }
     }
