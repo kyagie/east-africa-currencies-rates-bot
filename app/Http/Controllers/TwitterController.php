@@ -81,11 +81,13 @@ class TwitterController extends Controller
         ];
 
         foreach ($countries as $country) {
-            echo $flags[$country->name] . " \n " . $country->name . " " . date('D jS F y');
+            $tweet = "{$flags[$country->name]} {$country->name}" . "\r\n" . date('D jS F y') . "\r\n\n";
             foreach ($rates as $rate) {
                 $r = json_decode($rate->rates, true);
-                echo $currency_emojis[$rate->base] . " 1 " . $rate->base . ' >> ' . $country->symbol . round($r[$country->symbol], 2);
+                $tweet .= "{$currency_emojis[$rate->base]}" . " 1 " . $rate->base . "  >>  " . $country->symbol . number_format(round($r[$country->symbol], 2)) . "\r\n";
             }
+            // return $tweet;
+            $this->tweet($tweet);
         }
     }
 }
