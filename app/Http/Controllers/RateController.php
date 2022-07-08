@@ -17,8 +17,10 @@ class RateController extends Controller
         $this->countries = $countries;
     }
 
-    public function __invoke()
+    public function index()
     {
+        Rate::truncate();
+
         $base_sybmols = [
             'USD',
             'EUR',

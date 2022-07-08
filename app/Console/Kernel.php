@@ -2,9 +2,10 @@
 
 namespace App\Console;
 
-use App\Http\Controllers\RateController;
+use App\Models\Rate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new RateController)->dailyAt('10:30');
+        $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:30');
+        $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('10:40');
     }
 
     /**
