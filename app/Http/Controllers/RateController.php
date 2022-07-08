@@ -29,6 +29,10 @@ class RateController extends Controller
 
         $symbols = $this->countries->pluck('symbol')->toArray();
 
+        if (empty($symbols)) {
+            exit();
+        }
+
         foreach ($base_sybmols as $base_symbol) {
             $response = Http::withHeaders([
                 "apiKey" => env('EXCHANGE_API_KEY'),
@@ -45,7 +49,5 @@ class RateController extends Controller
                 'rates' => json_encode($rates),
             ]);
         }
-
-        
     }
 }

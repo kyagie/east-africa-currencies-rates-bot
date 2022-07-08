@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:30');
+        
         $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('10:40');
     }
 
