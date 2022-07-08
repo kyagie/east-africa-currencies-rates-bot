@@ -25,3 +25,7 @@ Route::match(['get', 'post'], '/webhook/twitter', [\App\Http\Controllers\Twitter
 
 Route::get('/tweet', [\App\Http\Controllers\TwitterController::class, 'tweet']);
 
+Route::get('/countries', [\App\Http\Controllers\CountryController::class, 'index']);
+
+
+

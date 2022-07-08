@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Support\Facades\Http;
 use App\Models\Rate;
 
@@ -9,6 +10,12 @@ use App\Models\Rate;
 class RateController extends Controller
 {
     //
+    public $countries;
+
+    public function __construct(Country $countries)
+    {
+        $this->countries = $countries;
+    }
 
     public function __invoke()
     {
@@ -18,12 +25,7 @@ class RateController extends Controller
             'GBP',
         ];
 
-        $symbols = [
-            'UGX',
-            'KES',
-            'TZS',
-            'RWF'
-        ];
+        $symbols = $this->countries->pluck('symbol')->toArray();
 
         foreach ($base_sybmols as $base_symbol) {
             $response = Http::withHeaders([
@@ -41,5 +43,7 @@ class RateController extends Controller
                 'rates' => json_encode($rates),
             ]);
         }
+
+        
     }
 }
