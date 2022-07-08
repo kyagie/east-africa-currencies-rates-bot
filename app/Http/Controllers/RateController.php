@@ -2,28 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Support\Facades\Http;
 use App\Models\Rate;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 
 class RateController extends Controller
 {
     //
+    public $countries;
 
-    public function __invoke()
+    public function __construct(Country $countries)
     {
+        $this->countries = $countries;
+    }
+
+    public function index()
+    {
+        Rate::truncate();
+
         $base_sybmols = [
             'USD',
             'EUR',
             'GBP',
         ];
 
-        $symbols = [
-            'UGX',
-            'KES',
-            'TZS',
-            'RWF'
-        ];
+        $symbols = $this->countries->pluck('symbol')->toArray();
+
+        if (empty($symbols)) {
+            SlackAlert::message("*No symbols found*");
+            exit();
+        }
 
         foreach ($base_sybmols as $base_symbol) {
             $response = Http::withHeaders([
@@ -41,5 +51,8 @@ class RateController extends Controller
                 'rates' => json_encode($rates),
             ]);
         }
+
+        SlackAlert::message("*New Rates Created* at " . date('H:i:s'));
+
     }
 }
