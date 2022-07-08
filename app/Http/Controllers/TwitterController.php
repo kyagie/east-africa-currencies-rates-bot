@@ -7,6 +7,7 @@ use App\Models\Rate;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 class TwitterController extends Controller
 {
@@ -52,6 +53,7 @@ class TwitterController extends Controller
 
         if (empty($countries) || empty($rates)) {
             # code...
+            SlackAlert::message("*No countries or rates found*");
             exit();
         }
 
@@ -75,6 +77,7 @@ class TwitterController extends Controller
                 $tweet .= "{$currency_emojis[$rate->base]}" . " 1 " . $rate->base . "  >>  " . $country->symbol . number_format(round($r[$country->symbol], 2)) . "\r\n";
             }
             $this->tweet($tweet);
+            SlackAlert::message("Tweet for " . $country->name . " created at " . date('H:i:s'));
         }
     }
 }

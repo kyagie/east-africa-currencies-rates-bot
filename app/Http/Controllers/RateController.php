@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use Illuminate\Support\Facades\Http;
 use App\Models\Rate;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 
 class RateController extends Controller
@@ -30,6 +31,7 @@ class RateController extends Controller
         $symbols = $this->countries->pluck('symbol')->toArray();
 
         if (empty($symbols)) {
+            SlackAlert::message("*No symbols found*");
             exit();
         }
 
@@ -49,5 +51,8 @@ class RateController extends Controller
                 'rates' => json_encode($rates),
             ]);
         }
+
+        SlackAlert::message("*New Rates Created* at " . date('H:i:s'));
+
     }
 }

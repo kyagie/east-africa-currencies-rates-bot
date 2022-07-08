@@ -2,9 +2,10 @@
 
 namespace App\Console;
 
-use App\Models\Rate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Stringable;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 
 class Kernel extends ConsoleKernel
@@ -17,9 +18,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:30');
-        
-        $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('10:40');
+        $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:30')->onFailure(function (Stringable $output) {
+            SlackAlert::message("*Error getting rates* " . $output);
+        });
+
+        $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('10:45')->onFailure(function (Stringable $output) {
+            SlackAlert::message("*Error posting rates* " . $output);
+        });
     }
 
     /**

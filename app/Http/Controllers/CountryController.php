@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use Illuminate\Http\Request;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 class CountryController extends Controller
 {
@@ -39,6 +39,7 @@ class CountryController extends Controller
             $country->symbol = $symbols[$c];
             $country->save();
         }
+        SlackAlert::message("*Countries Added* at " . date('H:i:s'));
 
     }
 }
