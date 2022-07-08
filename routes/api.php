@@ -23,5 +23,5 @@ Route::get('/rates', RateController::class);
 
 Route::match(['get', 'post'], '/webhook/twitter', [\App\Http\Controllers\TwitterController::class, 'index']);
 
-
+Route::get('/tweet', [\App\Http\Controllers\TwitterController::class, 'tweet']);
 
