@@ -52,7 +52,7 @@ class TwitterController extends Controller
 
         if (empty($countries) || empty($rates)) {
             # code...
-            return;
+            exit();
         }
 
         $flags = [
