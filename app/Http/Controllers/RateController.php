@@ -31,7 +31,7 @@ class RateController extends Controller
         $symbols = $this->countries->pluck('symbol')->toArray();
 
         if (empty($symbols)) {
-            SlackAlert::message("*No symbols found*");
+            SlackAlert::message("At Rate Func: *No symbols found*");
             exit();
         }
 

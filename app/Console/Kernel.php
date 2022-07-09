@@ -18,12 +18,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:30')->onFailure(function (Stringable $output) {
-            SlackAlert::message("*Error getting rates* " . $output);
+        $schedule->call('App\Http\Controllers\RateController@index')->dailyAt('10:50')->onFailure(function (Stringable $output) {
+            SlackAlert::message("*At Kernel: Error getting rates* " . $output);
         });
 
-        $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('10:45')->onFailure(function (Stringable $output) {
-            SlackAlert::message("*Error posting rates* " . $output);
+        $schedule->call('App\Http\Controllers\TwitterController@postRates')->dailyAt('11:05')->onFailure(function (Stringable $output) {
+            SlackAlert::message("*At Kernel: Error posting rates* " . $output);
         });
     }
 
