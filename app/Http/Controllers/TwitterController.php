@@ -53,7 +53,7 @@ class TwitterController extends Controller
 
         if (empty($countries) || empty($rates)) {
             # code...
-            SlackAlert::message("*No countries or rates found*");
+            SlackAlert::message("At postRates Func: *No countries or rates found*");
             exit();
         }
 
