@@ -18,11 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/rates', [\App\Http\Controllers\RateController::class, 'index']);
-
-// Route::get('/tweet', [\App\Http\Controllers\TwitterController::class, 'postRates']);
-
-Route::get('/countries', [\App\Http\Controllers\CountryController::class, 'index']);
 
 
 
