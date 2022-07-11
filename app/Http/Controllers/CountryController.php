@@ -11,6 +11,8 @@ class CountryController extends Controller
 
     public function index()
     {
+        Country::trucate();
+        
         $countries = [
             'Kenya',
             'Rwanda',
