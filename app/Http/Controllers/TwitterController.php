@@ -61,7 +61,9 @@ class TwitterController extends Controller
             'Kenya' => '🇰🇪',
             'Uganda' => '🇺🇬',
             'Tanzania' => '🇹🇿',
-            'Rwanda' => '🇷🇼'
+            'Rwanda' => '🇷🇼',
+            'South Sudan' => '🇸🇸',
+            'DRC' => '🇨🇬',
         ];
 
         $currency_emojis = [

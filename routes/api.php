@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route::get('/tweet', [\App\Http\Controllers\TwitterController::class, 'postRates']);
 
-// Route::get('/countries', [\App\Http\Controllers\CountryController::class, 'index']);
+Route::get('/countries', [\App\Http\Controllers\CountryController::class, 'index']);
 
 
 

@@ -16,6 +16,8 @@ class CountryController extends Controller
             'Rwanda',
             'Tanzania',
             'Uganda',
+            'South Sudan',
+            'DRC',
         ];
 
         $currencies = [
@@ -23,6 +25,8 @@ class CountryController extends Controller
             'Rwanda' => 'Rwanda Franc',
             'Tanzania' => 'Tanzanian Shilling',
             'Uganda' => 'Ugandan Shilling',
+            'South Sudan' => 'South Sudanese Pound',
+            'DRC' => 'Congolese Franc',
         ];
 
         $symbols = [
@@ -30,6 +34,8 @@ class CountryController extends Controller
             'Rwanda' => 'RWF',
             'Tanzania' => 'TZS',
             'Uganda' => 'UGX',
+            'South Sudan' => 'SSP',
+            'DRC' => 'CDF',
         ];
 
         foreach($countries as $c) {
