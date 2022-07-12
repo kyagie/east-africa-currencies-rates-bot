@@ -27,7 +27,7 @@ class CountryController extends Controller
             'Rwanda' => 'Rwanda Franc',
             'Tanzania' => 'Tanzanian Shilling',
             'Uganda' => 'Ugandan Shilling',
-            'South Sudan' => 'South Sudanese Pound',
+            'South Sudan' => 'Sudanese Pound',
             'DRC' => 'Congolese Franc',
         ];
 
@@ -36,7 +36,7 @@ class CountryController extends Controller
             'Rwanda' => 'RWF',
             'Tanzania' => 'TZS',
             'Uganda' => 'UGX',
-            'South Sudan' => 'SSP',
+            'South Sudan' => 'SDG',
             'DRC' => 'CDF',
         ];
 
