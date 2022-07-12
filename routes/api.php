@@ -18,6 +18,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/countries', [\App\Http\Controllers\CountryController::class, 'index']);
-
-
